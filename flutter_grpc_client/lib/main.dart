@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_grpc_client/src/service/grpc_service.dart';
 import 'package:flutter_grpc_client/src/service/lang_service.dart';
 import 'package:flutter_grpc_client/src/service/theme_service.dart';
 import 'package:flutter_grpc_client/util/lang/generated/l10n.dart';
@@ -15,6 +16,9 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (context) => ThemeService(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => GrpcService(),
         ),
       ],
       child: const MainApp(),
