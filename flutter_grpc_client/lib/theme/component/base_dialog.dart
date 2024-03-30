@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_grpc_client/src/service/theme_service.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BaseDialog extends StatelessWidget {
+class BaseDialog extends ConsumerWidget {
   const BaseDialog({
     super.key,
     this.title,
@@ -14,9 +15,9 @@ class BaseDialog extends StatelessWidget {
   final List<Widget>? actions;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return AlertDialog(
-      backgroundColor: context.colorScheme.surface,
+      backgroundColor: ref.colorScheme.surface,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
@@ -28,9 +29,9 @@ class BaseDialog extends StatelessWidget {
       title: title != null
           ? Text(
               title!,
-              style: context.textTheme.displayMedium!.copyWith(
+              style: ref.textTheme.displayMedium!.copyWith(
                 fontWeight: FontWeight.w600,
-                color: context.theme.colorScheme.onSurface,
+                color: ref.theme.colorScheme.onSurface,
               ),
             )
           : null,

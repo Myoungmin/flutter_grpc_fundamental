@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_grpc_client/src/service/theme_service.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CircularIndicator extends StatelessWidget {
+class CircularIndicator extends ConsumerWidget {
   const CircularIndicator({
     super.key,
     required this.child,
@@ -12,7 +13,7 @@ class CircularIndicator extends StatelessWidget {
   final bool isBusy;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Stack(
       children: [
         child,
@@ -25,7 +26,7 @@ class CircularIndicator extends StatelessWidget {
               color: Colors.black.withOpacity(0.5),
               alignment: Alignment.center,
               child: CircularProgressIndicator(
-                color: context.colorScheme.primary,
+                color: ref.colorScheme.primary,
                 value: isBusy ? null : 0,
               ),
             ),

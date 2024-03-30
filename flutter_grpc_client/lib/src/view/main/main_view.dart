@@ -12,13 +12,13 @@ class MainView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView(
-      viewModel: MainViewModel(),
-      builder: (context, viewModel) => Scaffold(
+      viewModelProvider: mainViewModelProvider,
+      builder: (ref, viewModel, state) => Scaffold(
         appBar: AppBar(
           title: Text(
             S.current.hello,
-            style: context.textTheme.titleLarge?.copyWith(
-              color: context.colorScheme.onSurface,
+            style: ref.textTheme.titleLarge?.copyWith(
+              color: ref.colorScheme.onSurface,
             ),
           ),
         ),
@@ -32,16 +32,16 @@ class MainView extends StatelessWidget {
                     title: S.current.hello,
                     content: Text(
                       S.current.hello,
-                      style: context.textTheme.titleLarge?.copyWith(
-                        color: context.theme.colorScheme.onSurface,
+                      style: ref.textTheme.titleLarge?.copyWith(
+                        color: ref.theme.colorScheme.onSurface,
                       ),
                     ),
                     actions: [
                       TextButton(
                         child: Text(
                           S.current.cancel,
-                          style: context.textTheme.bodyLarge?.copyWith(
-                            color: context.theme.colorScheme.onSurface,
+                          style: ref.textTheme.bodyLarge?.copyWith(
+                            color: ref.theme.colorScheme.onSurface,
                           ),
                         ),
                         onPressed: () async {
@@ -62,8 +62,8 @@ class MainView extends StatelessWidget {
                 tablet: S.current.tablet,
                 desktop: S.current.desktop,
               ),
-              style: context.textTheme.displayLarge?.copyWith(
-                color: context.colorScheme.onSurface,
+              style: ref.textTheme.displayLarge?.copyWith(
+                color: ref.colorScheme.onSurface,
               ),
             ),
           ),

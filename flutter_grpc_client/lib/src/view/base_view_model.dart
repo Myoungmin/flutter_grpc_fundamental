@@ -1,13 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BaseViewModel with ChangeNotifier {
-  bool _isBusy = false;
+abstract class BaseViewModel<S extends BaseViewState>
+    extends AutoDisposeNotifier<S> {}
 
-  bool get isBusy => _isBusy;
+abstract class BaseViewState {
+  const BaseViewState();
 
-  set isBusy(bool isBusy) {
-    if (_isBusy == isBusy) return;
-    _isBusy = isBusy;
-    notifyListeners();
-  }
+  bool get isBusy;
 }

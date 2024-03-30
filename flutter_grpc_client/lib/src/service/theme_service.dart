@@ -1,45 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_grpc_client/theme/foundation/app_theme.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ThemeService with ChangeNotifier {
-  ThemeService({
-    AppTheme? theme,
-  }) : theme = theme ?? AppTheme();
+final themeServiceProvider =
+    NotifierProvider<ThemeService, AppTheme>(ThemeService.new);
 
-  // 현재 테마
-  AppTheme theme;
-
-  void toggleTheme() {
-    if (theme.brightness == Brightness.light) {
-      theme = AppTheme(brightness: Brightness.dark);
-    } else {
-      theme = AppTheme(brightness: Brightness.light);
-    }
-    notifyListeners();
-  }
-
+class ThemeService extends Notifier<AppTheme> {
   ThemeData get themeData {
     return ThemeData(
-      scaffoldBackgroundColor: theme.colorScheme.surface,
+      scaffoldBackgroundColor: state.colorScheme.surface,
       appBarTheme: AppBarTheme(
-        backgroundColor: theme.colorScheme.surface,
+        backgroundColor: state.colorScheme.surface,
         elevation: 0,
         centerTitle: false,
         iconTheme: IconThemeData(
-          color: theme.colorScheme.onSurface,
+          color: state.colorScheme.onSurface,
         ),
-        titleTextStyle: theme.textTheme.displayMedium?.copyWith(
-          color: theme.colorScheme.onSurface,
+        titleTextStyle: state.textTheme.displayMedium?.copyWith(
+          color: state.colorScheme.onSurface,
         ),
       ),
     );
   }
+
+  @override
+  AppTheme build() => AppTheme(brightness: Brightness.light);
+
+  void toggleTheme() {
+    if (state.brightness == Brightness.light) {
+      state = AppTheme(brightness: Brightness.dark);
+    } else {
+      state = AppTheme(brightness: Brightness.light);
+    }
+  }
 }
 
-extension ThemeServiceExt on BuildContext {
-  ThemeService get themeService => watch<ThemeService>();
-  AppTheme get theme => themeService.theme;
+extension ThemeServiceExt on WidgetRef {
+  ThemeService get themeService => watch(themeServiceProvider.notifier);
+  AppTheme get theme => watch(themeServiceProvider);
   ColorScheme get colorScheme => theme.colorScheme;
   TextTheme get textTheme => theme.textTheme;
 }
