@@ -20,8 +20,8 @@ class GrpcHelloService extends Notifier<HelloClient> {
   late ClientChannel _channel;
   HelloClient get helloClient => state;
 
-  void updateChannel(String host, int port) {
-    _channel.shutdown(); // 기존 채널 종료
+  Future<void> updateChannel(String host, int port) async {
+    await _channel.shutdown(); // 기존 채널 종료
     // 새로운 채널로 상태 업데이트
     _channel = ClientChannel(
       host,
