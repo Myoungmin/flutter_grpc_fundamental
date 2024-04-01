@@ -1,5 +1,18 @@
-import 'package:dart_grpc_server/dart_grpc_server.dart' as dart_grpc_server;
+import 'package:dart_grpc_server/src/generated/helloworld.pbgrpc.dart';
+import 'package:grpc/grpc.dart';
 
-void main(List<String> arguments) {
-  print('Hello world: ${dart_grpc_server.calculate()}!');
+class GreeterService extends GreeterServiceBase {
+  @override
+  Future<HelloReply> sayHello(ServiceCall call, HelloRequest request) async {
+    return HelloReply()..message = 'Hello, ${request.name}!';
+  }
+}
+
+Future<void> main(List<String> args) async {
+  final server = Server.create(
+    services: [GreeterService()],
+    codecRegistry: CodecRegistry(codecs: const [GzipCodec(), IdentityCodec()]),
+  );
+  await server.serve(port: 50051);
+  print('Server listening on port ${server.port}...');
 }
