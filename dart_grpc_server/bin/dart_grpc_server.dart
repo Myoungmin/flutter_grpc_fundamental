@@ -1,16 +1,16 @@
-import 'package:dart_grpc_server/src/generated/helloworld.pbgrpc.dart';
+import 'package:dart_grpc_server/src/generated/hello.pbgrpc.dart';
 import 'package:grpc/grpc.dart';
 
-class GreeterService extends GreeterServiceBase {
+class HelloService extends HelloServiceBase {
   @override
-  Future<HelloReply> sayHello(ServiceCall call, HelloRequest request) async {
-    return HelloReply()..message = 'Hello, ${request.name}!';
+  Future<HelloResponse> sayHello(ServiceCall call, HelloRequest request) async {
+    return HelloResponse()..message = 'Hello, ${request.name}!';
   }
 }
 
 Future<void> main(List<String> args) async {
   final server = Server.create(
-    services: [GreeterService()],
+    services: [HelloService()],
     codecRegistry: CodecRegistry(codecs: const [GzipCodec(), IdentityCodec()]),
   );
   await server.serve(port: 50051);

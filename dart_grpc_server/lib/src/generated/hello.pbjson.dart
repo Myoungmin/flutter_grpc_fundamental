@@ -1,6 +1,6 @@
 //
 //  Generated code. Do not modify.
-//  source: helloworld.proto
+//  source: hello.proto
 //
 // @dart = 2.12
 
@@ -25,15 +25,15 @@ const HelloRequest$json = {
 final $typed_data.Uint8List helloRequestDescriptor = $convert.base64Decode(
     'CgxIZWxsb1JlcXVlc3QSEgoEbmFtZRgBIAEoCVIEbmFtZQ==');
 
-@$core.Deprecated('Use helloReplyDescriptor instead')
-const HelloReply$json = {
-  '1': 'HelloReply',
+@$core.Deprecated('Use helloResponseDescriptor instead')
+const HelloResponse$json = {
+  '1': 'HelloResponse',
   '2': [
     {'1': 'message', '3': 1, '4': 1, '5': 9, '10': 'message'},
   ],
 };
 
-/// Descriptor for `HelloReply`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List helloReplyDescriptor = $convert.base64Decode(
-    'CgpIZWxsb1JlcGx5EhgKB21lc3NhZ2UYASABKAlSB21lc3NhZ2U=');
+/// Descriptor for `HelloResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List helloResponseDescriptor = $convert.base64Decode(
+    'Cg1IZWxsb1Jlc3BvbnNlEhgKB21lc3NhZ2UYASABKAlSB21lc3NhZ2U=');
 
