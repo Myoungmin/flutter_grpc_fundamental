@@ -1,4 +1,4 @@
-import 'package:flutter_grpc_client/protos/helloworld.pbgrpc.dart';
+import 'package:flutter_grpc_client/protos/hello.pbgrpc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grpc/grpc.dart';
 
