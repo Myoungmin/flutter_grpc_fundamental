@@ -22,51 +22,63 @@ class MainView extends StatelessWidget {
             ),
           ),
         ),
-        body: Center(
-          child: GestureDetector(
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return BaseDialog(
-                    title: S.current.hello,
-                    content: Text(
-                      S.current.hello,
-                      style: ref.textTheme.titleLarge?.copyWith(
-                        color: ref.theme.colorScheme.onSurface,
-                      ),
-                    ),
-                    actions: [
-                      TextButton(
-                        child: Text(
-                          S.current.cancel,
-                          style: ref.textTheme.bodyLarge?.copyWith(
+        body: Column(
+          children: [
+            Center(
+              child: GestureDetector(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return BaseDialog(
+                        title: S.current.hello,
+                        content: Text(
+                          S.current.hello,
+                          style: ref.textTheme.titleLarge?.copyWith(
                             color: ref.theme.colorScheme.onSurface,
                           ),
                         ),
-                        onPressed: () async {
-                          Navigator.pop(context);
-                          await Future.delayed(const Duration(seconds: 1));
-                          await viewModel.circularIndicatorTest(2);
-                        },
-                      ),
-                    ],
+                        actions: [
+                          TextButton(
+                            child: Text(
+                              S.current.cancel,
+                              style: ref.textTheme.bodyLarge?.copyWith(
+                                color: ref.theme.colorScheme.onSurface,
+                              ),
+                            ),
+                            onPressed: () async {
+                              Navigator.pop(context);
+                              await Future.delayed(const Duration(seconds: 1));
+                              await viewModel.circularIndicatorTest(2);
+                            },
+                          ),
+                        ],
+                      );
+                    },
                   );
                 },
-              );
-            },
-            child: Text(
-              context.layout(
-                S.current.desktop,
-                mobile: S.current.mobile,
-                tablet: S.current.tablet,
-                desktop: S.current.desktop,
-              ),
-              style: ref.textTheme.displayLarge?.copyWith(
-                color: ref.colorScheme.onSurface,
+                child: Text(
+                  context.layout(
+                    S.current.desktop,
+                    mobile: S.current.mobile,
+                    tablet: S.current.tablet,
+                    desktop: S.current.desktop,
+                  ),
+                  style: ref.textTheme.displayLarge?.copyWith(
+                    color: ref.colorScheme.onSurface,
+                  ),
+                ),
               ),
             ),
-          ),
+            Center(
+              child: TextButton(
+                child: Text(state.strTextButton),
+                onPressed: () async {
+                  viewModel.sayHello();
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
